@@ -1,24 +1,23 @@
-import logo from './logo.svg';
-import './App.css';
-
+import Main from "./components/Main";
+import Info from "./components/Info";
+import { MainContext } from "./components/context";
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+const baseURL = "https://api.themoviedb.org/3";
+const poster = "https://www.themoviedb.org/t/p/original/";
+const data = {
+  baseURL,
+  poster,
+};
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <MainContext.Provider value={data}>
+      <Router>
+        <Routes>
+          <Route path="/" element={<Main />} />
+          <Route path="/info/:id" element={<Info />} />
+        </Routes>
+      </Router>
+    </MainContext.Provider>
   );
 }
 
