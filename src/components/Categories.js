@@ -59,7 +59,7 @@ const Categories = () => {
       ) : (
         <div>
           {topRated && (
-            <div className="p-4 flex items-center overflow-x-scroll gap-1 forScroll">
+            <div className="p-4 flex items-center overflow-x-scroll gap-1">
               {topRated.map((item) => (
                 <Link key={item.id} to={`/info/${item.id}`}>
                   <img
@@ -72,7 +72,7 @@ const Categories = () => {
             </div>
           )}
           {popular && (
-            <div className="p-4 flex items-center overflow-x-scroll gap-1 forScroll">
+            <div className="p-4 flex items-center overflow-x-scroll gap-1">
               {popular.map((item) => (
                 <Link key={item.id} to={`/info/${item.id}`}>
                   <img

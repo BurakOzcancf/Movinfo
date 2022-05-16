@@ -8,6 +8,8 @@
 }
 body {
   padding: 2rem 0;
+  background-color: rgb(47, 47, 47);
+  color: white;
 }
 .header__image,
 .category__image,
@@ -19,6 +21,12 @@ body {
   .header__image,
   .category__image,
   .info__image {
+    max-width: 12rem;
+    min-width: auto;
+  }
+}
+@media only screen and (min-width: 780px) {
+  .header__image {
     max-width: 15rem;
   }
 }
@@ -27,14 +35,14 @@ img {
   border-radius: 1rem;
 }
 
-.forScroll::-webkit-scrollbar-button {
+::-webkit-scrollbar-button {
   width: 0;
 }
-.forScroll::-webkit-scrollbar-thumb {
-  background-color: rgb(197, 197, 197);
+::-webkit-scrollbar-thumb {
+  background-color: #facc15;
   border-radius: 1rem;
 }
-.forScroll::-webkit-scrollbar {
+::-webkit-scrollbar {
   height: 0.5rem;
   border-radius: 1rem;
   background-color: rgb(47, 47, 47);

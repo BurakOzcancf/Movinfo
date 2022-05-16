@@ -19,10 +19,9 @@ const Header = () => {
 
   return (
     <header>
-      <h1 className="text-5xl py-2 text-center font-bold">Movinfo</h1>
       <h2 className="text-2xl ">Now Playing</h2>
       {header && (
-        <div className="p-4 flex items-center overflow-x-scroll gap-1 sm:hidden forScroll">
+        <div className="p-4 flex items-center overflow-x-scroll gap-1 sm:hidden ">
           {header.map((item) => (
             <Link key={item.id} to={`/info/${item.id}`}>
               <img
