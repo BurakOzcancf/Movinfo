@@ -1,6 +1,6 @@
 {
-  "homepage": "https://BurakOzcancf.github.io/Movinfo",
-  "name": "my-app",
+  "homepage": "https://BurakOzcancf.github.io/movinfo",
+  "name": "movinfo",
   "version": "0.1.0",
   "private": true,
   "dependencies": {

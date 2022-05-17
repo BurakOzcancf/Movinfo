@@ -15,7 +15,7 @@ function App() {
       <h1 className="text-5xl pb-2 text-center font-bold">Movinfo</h1>
       <Router>
         <Routes>
-          <Route path="/Movinfo" element={<Main />} />
+          <Route path="/" element={<Main />} />
           <Route path="/info/:id" element={<Info />} />
           <Route path="/person/:id" element={<Person />} />
         </Routes>
