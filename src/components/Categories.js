@@ -46,15 +46,16 @@ const Categories = () => {
       />
       {query ? (
         <div>
-          {search.map((item) => (
-            <Link key={item.id} to={`/info/${item.id}`}>
-              <img
-                className="category__image"
-                src={poster + item.poster_path}
-                alt={poster + item.poster_path}
-              />
-            </Link>
-          ))}
+          {search &&
+            search.map((item) => (
+              <Link key={item.id} to={`/info/${item.id}`}>
+                <img
+                  className="category__image"
+                  src={poster + item.poster_path}
+                  alt={poster + item.poster_path}
+                />
+              </Link>
+            ))}
         </div>
       ) : (
         <div>
