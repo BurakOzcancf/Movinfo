@@ -44,15 +44,15 @@ const Info = () => {
             <img
               className="w-3/12 rounded-md ml-10 -mr-5 z-10"
               src={poster + movinfo.poster_path}
-              alt={poster + movinfo.poster_path}
+              alt={movinfo.title}
             />
             <img
               className="m-auto rounded-md -ml-10 w-9/12"
               src={poster + movinfo.backdrop_path}
-              alt={poster + movinfo.backdrop_path}
+              alt={movinfo.title}
             />
           </div>
-          <ul>
+          <ul className="p-4">
             <li>
               <h2 className="text-2xl">Overview</h2>
               <p className="opacity-90">{movinfo.overview}</p>
@@ -83,7 +83,11 @@ const Info = () => {
             </li>
             <li>
               Production Country:{" "}
-              {movinfo.production_countries.map((item) => item.name)}
+              <span className="opacity-80">
+                {movinfo.production_countries.map((item) => (
+                  <span> -{item.name} </span>
+                ))}
+              </span>
             </li>
           </ul>
           <h2 className="text-2xl">Similar Movies</h2>
@@ -94,14 +98,14 @@ const Info = () => {
                   className="w-32"
                   key={item.id}
                   src={poster + item.poster_path}
-                  alt={poster + item.poster_path}
+                  alt={item.title}
                 />
               ))}
             </div>
           )}
           Cast
           {cast && (
-            <div className="grid grid-cols-2 gap-2">
+            <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-2">
               {cast.map((item) => (
                 <Link
                   key={item.id}
@@ -112,12 +116,15 @@ const Info = () => {
                     onError={(e) => {
                       e.currentTarget.src = defaulProfile;
                     }}
-                    className="w-20 m-auto"
+                    className="w-40 m-auto"
                     src={poster + item.profile_path}
                     alt={item.name}
                   />
                   <h2>{item.name}</h2>
-                  <small>As: {item.character}</small>
+                  <small>
+                    <span className="text-yellow-400 font-bold">As</span>:{" "}
+                    <span className="opacity-90">{item.character}</span>
+                  </small>
                 </Link>
               ))}
             </div>

@@ -40,7 +40,7 @@ const Header = () => {
               <img
                 className="hover:scale-105 transition-all header__image"
                 src={poster + header[3].poster_path}
-                alt={poster + header[3].poster_path}
+                alt={header[3].title}
               />
             </Link>
           </li>
@@ -49,7 +49,7 @@ const Header = () => {
               <img
                 className="hover:scale-105 transition-all header__image"
                 src={poster + header[1].poster_path}
-                alt={poster + header[1].poster_path}
+                alt={header[1].title}
               />
             </Link>
           </li>
@@ -58,7 +58,7 @@ const Header = () => {
               <img
                 className="scale-105 hover:scale-110 transition-all header__image"
                 src={poster + header[0].poster_path}
-                alt={poster + header[0].poster_path}
+                alt={header[0].title}
               />
             </Link>
           </li>
@@ -67,7 +67,7 @@ const Header = () => {
               <img
                 className="hover:scale-105 transition-all header__image"
                 src={poster + header[2].poster_path}
-                alt={poster + header[2].poster_path}
+                alt={header[2].title}
               />
             </Link>
           </li>
@@ -76,7 +76,7 @@ const Header = () => {
               <img
                 className="hidden xl:block z-0 hover:scale-105 transition-all header__image"
                 src={poster + header[4].poster_path}
-                alt={poster + header[4].poster_path}
+                alt={header[4].title}
               />
             </Link>
           </li>

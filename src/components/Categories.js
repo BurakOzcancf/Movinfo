@@ -40,7 +40,7 @@ const Categories = () => {
       <input
         type="text"
         placeholder="Find your Movinfo..."
-        className="border-2 border-slate-900 my-4 mx-auto block rounded-md px-2"
+        className="border-2 border-slate-900 my-4 mx-auto block rounded-md px-2 text-black"
         value={query}
         onChange={(e) => setQuery(e.target.value)}
       />
@@ -52,13 +52,14 @@ const Categories = () => {
                 <img
                   className="category__image"
                   src={poster + item.poster_path}
-                  alt={poster + item.poster_path}
+                  alt={item.title}
                 />
               </Link>
             ))}
         </div>
       ) : (
         <div>
+          <h2>Top Rated</h2>
           {topRated && (
             <div className="p-4 flex items-center overflow-x-scroll gap-1">
               {topRated.map((item) => (
@@ -66,12 +67,13 @@ const Categories = () => {
                   <img
                     className="hover:scale-105 transition-all category__image"
                     src={poster + item.poster_path}
-                    alt={poster + item.poster_path}
+                    alt={item.title}
                   />
                 </Link>
               ))}
             </div>
           )}
+          <h2>Popular</h2>
           {popular && (
             <div className="p-4 flex items-center overflow-x-scroll gap-1">
               {popular.map((item) => (
@@ -79,7 +81,7 @@ const Categories = () => {
                   <img
                     className="hover:scale-105 transition-all category__image"
                     src={poster + item.poster_path}
-                    alt={poster + item.poster_path}
+                    alt={item.title}
                   />
                 </Link>
               ))}

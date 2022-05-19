@@ -4,7 +4,7 @@ import React from "react";
 
 const Main = () => {
   return (
-    <div>
+    <div className="pb-4">
       <Header />
       <Categories />
     </div>
