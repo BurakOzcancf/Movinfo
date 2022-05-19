@@ -30,9 +30,6 @@ img {
   border-radius: 1rem;
 }
 
-::-webkit-scrollbar-button {
-  width: 0;
-}
 ::-webkit-scrollbar-thumb {
   background-color: #facc1560;
   transition: 0.5s;
@@ -43,6 +40,7 @@ img {
 }
 ::-webkit-scrollbar {
   height: 0.5rem;
+  width: 0.8rem;
   border-radius: 1rem;
   background-color: rgb(24, 24, 24);
 }
