@@ -39,8 +39,8 @@ const Categories = () => {
     <div>
       <input
         type="text"
-        placeholder="Find your Movinfo..."
-        className="border-2 border-slate-900 my-4 mx-auto block rounded-md px-2 text-black"
+        placeholder="Find your Movinfos..."
+        className="border-2 border-slate-900 my-8 mx-auto w-60 block rounded-md px-2 text-black"
         value={query}
         onChange={(e) => setQuery(e.target.value)}
       />
@@ -59,7 +59,7 @@ const Categories = () => {
         </div>
       ) : (
         <div>
-          <h2>Top Rated</h2>
+          <h2 className="px-4 text-xl">Top Rated</h2>
           {topRated && (
             <div className="p-4 flex items-center overflow-x-scroll gap-1">
               {topRated.map((item) => (
@@ -73,7 +73,7 @@ const Categories = () => {
               ))}
             </div>
           )}
-          <h2>Popular</h2>
+          <h2 className="px-4 text-xl mt-4">Popular</h2>
           {popular && (
             <div className="p-4 flex items-center overflow-x-scroll gap-1">
               {popular.map((item) => (

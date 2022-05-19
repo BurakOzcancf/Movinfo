@@ -18,8 +18,8 @@ const Header = () => {
   }, [baseURL]);
 
   return (
-    <header>
-      <h2 className="text-2xl ">Now Playing</h2>
+    <header className="my-4">
+      <h2 className="p-4 text-3xl lg:mb-2 lg:text-center">Now Playing</h2>
       {header && (
         <div className="p-4 flex items-center overflow-x-scroll gap-1 sm:hidden ">
           {header.map((item) => (
@@ -35,7 +35,7 @@ const Header = () => {
       )}
       {header && (
         <ul className="hidden w-full sm:flex items-center justify-center gap-4">
-          <li className="hidden xl:block hover:z-30">
+          <li className="hidden xl:block hover:z-30 scale-95">
             <Link to={`/info/${header[3].id}`}>
               <img
                 className="hover:scale-105 transition-all header__image"
@@ -44,7 +44,7 @@ const Header = () => {
               />
             </Link>
           </li>
-          <li className="-ml-12 hover:z-30">
+          <li className="-ml-12 z-20 hover:z-30">
             <Link to={`/info/${header[1].id}`}>
               <img
                 className="hover:scale-105 transition-all header__image"
@@ -71,7 +71,7 @@ const Header = () => {
               />
             </Link>
           </li>
-          <li className="hidden xl:block hover:z-30 ">
+          <li className="hidden xl:block z-0 hover:z-30 scale-95">
             <Link to={`/info/${header[4].id}`}>
               <img
                 className="hidden xl:block z-0 hover:scale-105 transition-all header__image"

@@ -13,11 +13,14 @@ function App() {
   return (
     <MainContext.Provider value={data}>
       <Router>
-        <Link to={"/"}>
-          <h1 className="text-5xl p-2 m-auto font-bold text-yellow-400">
-            Movinfo
-          </h1>
-        </Link>
+        <div className=" bg-gradient-to-r to-transparent via-yellow-400 from-transparent  py-2 text-center rounded-md">
+          <Link to={"/"}>
+            <h1 className="text-5xl inline-block m-auto font-bold  text-slate-800">
+              Movinfos
+            </h1>
+          </Link>
+        </div>
+
         <Routes>
           <Route path="/" element={<Main />} />
           <Route path="/info/:id" element={<Info />} />

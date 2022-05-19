@@ -3,7 +3,7 @@ import axios from "axios";
 import { useParams } from "react-router-dom";
 import { Link } from "react-router-dom";
 import { MainContext } from "./context";
-import defaulProfile from "./assets/defaultProfile.jpg";
+import defaulProfile from "./assets/defaultProfile.PNG";
 const Info = () => {
   const params = useParams();
   const [movinfo, setMovinfo] = useState("");
@@ -103,9 +103,9 @@ const Info = () => {
               ))}
             </div>
           )}
-          Cast
+          <h2 className="text-yellow-400 text-2xl mt-4 font-bold p-4">Cast</h2>
           {cast && (
-            <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-2">
+            <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-y-8">
               {cast.map((item) => (
                 <Link
                   key={item.id}

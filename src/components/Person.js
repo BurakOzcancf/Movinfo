@@ -1,13 +1,13 @@
 import React, { useEffect, useState, useContext } from "react";
 import axios from "axios";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { MainContext } from "./context";
 const Person = () => {
   const params = useParams();
   const { baseURL, poster } = useContext(MainContext);
   const [person, setPerson] = useState("");
   // const [photo, setPhoto] = useState("");
-  // const [personMovie, setPersonMovie] = useState("");
+  const [personMovie, setPersonMovie] = useState("");
   useEffect(() => {
     axios
       .get(
@@ -23,13 +23,13 @@ const Person = () => {
     //   .then((response) => {
     //     setPhoto(response.data.profiles);
     //   });
-    // axios
-    //   .get(
-    //     `${baseURL}/person/${params.id}/movie_credits?api_key=${process.env.REACT_APP_API}&language=en-US`
-    //   )
-    //   .then((response) => {
-    //     setPersonMovie(response.data.cast);
-    //   });
+    axios
+      .get(
+        `${baseURL}/person/${params.id}/movie_credits?api_key=${process.env.REACT_APP_API}&language=en-US`
+      )
+      .then((response) => {
+        setPersonMovie(response.data.cast);
+      });
   }, [params, baseURL]);
 
   return (
@@ -51,13 +51,21 @@ const Person = () => {
         {photo &&
           photo.map((item) => <img src={poster + item.file_path} alt="" />)}
       </div> */}
-        {/* <div>
-        {personMovie &&
-          personMovie.map((item) => (
-            <img src={poster + item.poster_path} alt="" />
-          ))}
-      </div> */}
       </div>
+      <h2>Filmography</h2>
+      {personMovie && (
+        <div className="p-4 flex items-center overflow-x-scroll gap-1">
+          {personMovie.map((item) => (
+            <Link key={item.id} to={`/info/${item.id}`}>
+              <img
+                src={poster + item.poster_path}
+                alt={item.name}
+                className="category__image hover:scale-105 transition-all"
+              />
+            </Link>
+          ))}
+        </div>
+      )}
     </div>
   );
 };
