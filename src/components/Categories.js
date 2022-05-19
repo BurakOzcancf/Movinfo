@@ -45,12 +45,12 @@ const Categories = () => {
         onChange={(e) => setQuery(e.target.value)}
       />
       {query ? (
-        <div>
+        <div className="grid p-4 gap-4 justify-center  sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 max-w-screen-xl m-auto">
           {search &&
             search.map((item) => (
               <Link key={item.id} to={`/info/${item.id}`}>
                 <img
-                  className="category__image"
+                  className="category__image max-w-xs m-auto"
                   src={poster + item.poster_path}
                   alt={item.title}
                 />
