@@ -7,11 +7,11 @@ const Categories = () => {
   const [search, setSearch] = useState("");
   const [topRated, setTopRated] = useState("");
   const [popular, setPopular] = useState("");
-  const [sciFi, setSciFi] = useState("");
-  const [batman, setBatman] = useState("");
-  const [angry, setAngry] = useState("");
-  const [angrys, setAngrys] = useState("");
-  const [angryss, setAngryss] = useState("");
+  const [cult, setCult] = useState("");
+  const [acFi, setAcFİ] = useState("");
+  const [someMovies, setSomeMovies] = useState("");
+  const [comedy, setComedy] = useState("");
+  const [animation, setAnimation] = useState("");
   const { baseURL, poster } = useContext(MainContext);
   useEffect(() => {
     if (query) {
@@ -33,45 +33,45 @@ const Categories = () => {
       });
     axios
       .get(
-        `https://api.themoviedb.org/3/movie/popular?api_key=${process.env.REACT_APP_API}&language=en-US&page=1`
+        `${baseURL}/movie/popular?api_key=${process.env.REACT_APP_API}&language=en-US&page=1`
       )
       .then((response) => {
         setPopular(response.data.results);
       });
     axios
       .get(
-        `https://api.themoviedb.org/3/movie/278/recommendations?api_key=8ee0783e9a3e5713e58fb29ede10b792&language=en-US&page=1`
+        `${baseURL}/movie/278/recommendations?api_key=${process.env.REACT_APP_API}&language=en-US&page=1`
       )
       .then((response) => {
-        setSciFi(response.data.results);
+        setCult(response.data.results);
       });
     axios
       .get(
-        `https://api.themoviedb.org/3/movie/155/recommendations?api_key=8ee0783e9a3e5713e58fb29ede10b792&language=en-US&page=1`
+        `${baseURL}/movie/155/recommendations?api_key=${process.env.REACT_APP_API}&language=en-US&page=1`
       )
       .then((response) => {
-        setBatman(response.data.results);
+        setAcFİ(response.data.results);
       });
     axios
       .get(
-        `https://api.themoviedb.org/3/movie/389/recommendations?api_key=8ee0783e9a3e5713e58fb29ede10b792&language=en-US&page=1`
+        `${baseURL}/movie/389/recommendations?api_key=${process.env.REACT_APP_API}&language=en-US&page=1`
       )
       .then((response) => {
-        setAngry(response.data.results);
+        setSomeMovies(response.data.results);
       });
     axios
       .get(
-        `https://api.themoviedb.org/3/movie/72105/recommendations?api_key=8ee0783e9a3e5713e58fb29ede10b792&language=en-US&page=1`
+        `${baseURL}/movie/72105/recommendations?api_key=${process.env.REACT_APP_API}&language=en-US&page=1`
       )
       .then((response) => {
-        setAngrys(response.data.results);
+        setComedy(response.data.results);
       });
     axios
       .get(
-        `https://api.themoviedb.org/3/movie/14160/recommendations?api_key=8ee0783e9a3e5713e58fb29ede10b792&language=en-US&page=1`
+        `${baseURL}/movie/14160/recommendations?api_key=${process.env.REACT_APP_API}&language=en-US&page=1`
       )
       .then((response) => {
-        setAngryss(response.data.results);
+        setAnimation(response.data.results);
       });
   }, [query, baseURL]);
 
@@ -129,9 +129,9 @@ const Categories = () => {
             </div>
           )}
           <h2 className="px-4 text-xl mt-4">Cult Classic</h2>
-          {sciFi && (
+          {cult && (
             <div className="p-4 flex items-center overflow-x-scroll gap-1">
-              {sciFi.map((item) => (
+              {cult.map((item) => (
                 <Link key={item.id} to={`/info/${item.id}`}>
                   <img
                     className="hover:scale-105 transition-all category__image"
@@ -143,9 +143,9 @@ const Categories = () => {
             </div>
           )}
           <h2 className="px-4 text-xl mt-4">Action, Sci-Fi, Drama</h2>
-          {batman && (
+          {acFi && (
             <div className="p-4 flex items-center overflow-x-scroll gap-1">
-              {batman.map((item) => (
+              {acFi.map((item) => (
                 <Link key={item.id} to={`/info/${item.id}`}>
                   <img
                     className="hover:scale-105 transition-all category__image"
@@ -157,9 +157,9 @@ const Categories = () => {
             </div>
           )}
           <h2 className="px-4 text-xl mt-4">Some Good Movies</h2>
-          {angry && (
+          {someMovies && (
             <div className="p-4 flex items-center overflow-x-scroll gap-1">
-              {angry.map((item) => (
+              {someMovies.map((item) => (
                 <Link key={item.id} to={`/info/${item.id}`}>
                   <img
                     className="hover:scale-105 transition-all category__image"
@@ -171,9 +171,9 @@ const Categories = () => {
             </div>
           )}
           <h2 className="px-4 text-xl mt-4">Comedy</h2>
-          {angrys && (
+          {comedy && (
             <div className="p-4 flex items-center overflow-x-scroll gap-1">
-              {angrys.map((item) => (
+              {comedy.map((item) => (
                 <Link key={item.id} to={`/info/${item.id}`}>
                   <img
                     className="hover:scale-105 transition-all category__image"
@@ -185,9 +185,9 @@ const Categories = () => {
             </div>
           )}
           <h2 className="px-4 text-xl mt-4">Animation</h2>
-          {angryss && (
+          {animation && (
             <div className="p-4 flex items-center overflow-x-scroll gap-1">
-              {angryss.map((item) => (
+              {animation.map((item) => (
                 <Link key={item.id} to={`/info/${item.id}`}>
                   <img
                     className="hover:scale-105 transition-all category__image"
