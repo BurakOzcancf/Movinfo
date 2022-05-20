@@ -27,7 +27,7 @@ const Header = () => {
               <img
                 className="hover:scale-105 transition-all header__image"
                 src={poster + item.poster_path}
-                alt={poster + item.poster_path}
+                alt={item.id}
               />
             </Link>
           ))}
