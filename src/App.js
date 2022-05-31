@@ -3,13 +3,31 @@ import Info from "./components/Info";
 import Person from "./components/Person";
 import { MainContext } from "./components/context";
 import { BrowserRouter as Router, Link, Route, Routes } from "react-router-dom";
+import { useState } from "react";
 const baseURL = "https://api.themoviedb.org/3";
 const poster = "https://www.themoviedb.org/t/p/original/";
-const data = {
-  baseURL,
-  poster,
-};
+
 function App() {
+  const [favourites, setFavourites] = useState([]);
+
+  const addFavouriteMovie = (movie) => {
+    if (!favourites.includes(movie)) {
+      const newFavouriteList = [...favourites, movie];
+      setFavourites([...new Set(newFavouriteList)]);
+    } else {
+      const newFavouriteList = favourites.filter(
+        (favourite) => favourite.id !== movie.id
+      );
+      setFavourites(newFavouriteList);
+    }
+  };
+  const data = {
+    baseURL,
+    poster,
+    favourites,
+    setFavourites,
+    addFavouriteMovie,
+  };
   return (
     <MainContext.Provider value={data}>
       <Router>

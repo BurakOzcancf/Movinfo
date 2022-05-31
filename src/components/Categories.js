@@ -12,7 +12,7 @@ const Categories = () => {
   const [someMovies, setSomeMovies] = useState("");
   const [comedy, setComedy] = useState("");
   const [animation, setAnimation] = useState("");
-  const { baseURL, poster } = useContext(MainContext);
+  const { baseURL, poster, addFavouriteMovie } = useContext(MainContext);
   useEffect(() => {
     if (query) {
       axios
@@ -88,14 +88,22 @@ const Categories = () => {
         <div className="grid p-4 gap-4 justify-center  sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 max-w-screen-xl m-auto">
           {search &&
             search.map((item) => (
-              <Link key={item.id} to={`/info/${item.id}`}>
-                <img
-                  className="category__image max-w-xs m-auto"
-                  src={poster + item.poster_path}
-                  alt={item.title}
-                />
-                {item.id}
-              </Link>
+              <div className="relative">
+                <Link key={item.id} to={`/info/${item.id}`}>
+                  <img
+                    className="category__image max-w-xs m-auto"
+                    src={poster + item.poster_path}
+                    alt={item.title}
+                  />
+                  {item.id}
+                </Link>
+                <div
+                  className="absolute bottom-4 right-4 bg-black bg-opacity-60 p-2 rounded-md"
+                  onClick={() => addFavouriteMovie(item)}
+                >
+                  Bookmark
+                </div>
+              </div>
             ))}
         </div>
       ) : (
@@ -104,13 +112,21 @@ const Categories = () => {
           {topRated && (
             <div className="p-4 flex items-center overflow-x-scroll gap-1">
               {topRated.map((item) => (
-                <Link key={item.id} to={`/info/${item.id}`}>
-                  <img
-                    className="hover:scale-105 transition-all category__image"
-                    src={poster + item.poster_path}
-                    alt={item.title}
-                  />
-                </Link>
+                <div className="relative">
+                  <Link key={item.id} to={`/info/${item.id}`}>
+                    <img
+                      className="hover:scale-105 transition-all category__image"
+                      src={poster + item.poster_path}
+                      alt={item.title}
+                    />
+                  </Link>
+                  <div
+                    className="absolute bottom-4 right-4 bg-black bg-opacity-60 p-2 rounded-md"
+                    onClick={() => addFavouriteMovie(item)}
+                  >
+                    Bookmark
+                  </div>
+                </div>
               ))}
             </div>
           )}
@@ -118,13 +134,21 @@ const Categories = () => {
           {popular && (
             <div className="p-4 flex items-center overflow-x-scroll gap-1">
               {popular.map((item) => (
-                <Link key={item.id} to={`/info/${item.id}`}>
-                  <img
-                    className="hover:scale-105 transition-all category__image"
-                    src={poster + item.poster_path}
-                    alt={item.title}
-                  />
-                </Link>
+                <div className="relative">
+                  <Link key={item.id} to={`/info/${item.id}`}>
+                    <img
+                      className="hover:scale-105 transition-all category__image"
+                      src={poster + item.poster_path}
+                      alt={item.title}
+                    />
+                  </Link>
+                  <div
+                    className="absolute bottom-4 right-4 bg-black bg-opacity-60 p-2 rounded-md"
+                    onClick={() => addFavouriteMovie(item)}
+                  >
+                    Bookmark
+                  </div>
+                </div>
               ))}
             </div>
           )}
@@ -132,13 +156,21 @@ const Categories = () => {
           {cult && (
             <div className="p-4 flex items-center overflow-x-scroll gap-1">
               {cult.map((item) => (
-                <Link key={item.id} to={`/info/${item.id}`}>
-                  <img
-                    className="hover:scale-105 transition-all category__image"
-                    src={poster + item.poster_path}
-                    alt={item.title}
-                  />
-                </Link>
+                <div className="relative">
+                  <Link key={item.id} to={`/info/${item.id}`}>
+                    <img
+                      className="hover:scale-105 transition-all category__image"
+                      src={poster + item.poster_path}
+                      alt={item.title}
+                    />
+                  </Link>
+                  <div
+                    className="absolute bottom-4 right-4 bg-black bg-opacity-60 p-2 rounded-md"
+                    onClick={() => addFavouriteMovie(item)}
+                  >
+                    Bookmark
+                  </div>
+                </div>
               ))}
             </div>
           )}
@@ -146,13 +178,21 @@ const Categories = () => {
           {acFi && (
             <div className="p-4 flex items-center overflow-x-scroll gap-1">
               {acFi.map((item) => (
-                <Link key={item.id} to={`/info/${item.id}`}>
-                  <img
-                    className="hover:scale-105 transition-all category__image"
-                    src={poster + item.poster_path}
-                    alt={item.title}
-                  />
-                </Link>
+                <div className="relative">
+                  <Link key={item.id} to={`/info/${item.id}`}>
+                    <img
+                      className="hover:scale-105 transition-all category__image"
+                      src={poster + item.poster_path}
+                      alt={item.title}
+                    />
+                  </Link>
+                  <div
+                    className="absolute bottom-4 right-4 bg-black bg-opacity-60 p-2 rounded-md"
+                    onClick={() => addFavouriteMovie(item)}
+                  >
+                    Bookmark
+                  </div>
+                </div>
               ))}
             </div>
           )}
@@ -160,13 +200,21 @@ const Categories = () => {
           {someMovies && (
             <div className="p-4 flex items-center overflow-x-scroll gap-1">
               {someMovies.map((item) => (
-                <Link key={item.id} to={`/info/${item.id}`}>
-                  <img
-                    className="hover:scale-105 transition-all category__image"
-                    src={poster + item.poster_path}
-                    alt={item.title}
-                  />
-                </Link>
+                <div className="relative">
+                  <Link key={item.id} to={`/info/${item.id}`}>
+                    <img
+                      className="hover:scale-105 transition-all category__image"
+                      src={poster + item.poster_path}
+                      alt={item.title}
+                    />
+                  </Link>
+                  <div
+                    className="absolute bottom-4 right-4 bg-black bg-opacity-60 p-2 rounded-md"
+                    onClick={() => addFavouriteMovie(item)}
+                  >
+                    Bookmark
+                  </div>
+                </div>
               ))}
             </div>
           )}
@@ -174,13 +222,21 @@ const Categories = () => {
           {comedy && (
             <div className="p-4 flex items-center overflow-x-scroll gap-1">
               {comedy.map((item) => (
-                <Link key={item.id} to={`/info/${item.id}`}>
-                  <img
-                    className="hover:scale-105 transition-all category__image"
-                    src={poster + item.poster_path}
-                    alt={item.title}
-                  />
-                </Link>
+                <div className="relative">
+                  <Link key={item.id} to={`/info/${item.id}`}>
+                    <img
+                      className="hover:scale-105 transition-all category__image"
+                      src={poster + item.poster_path}
+                      alt={item.title}
+                    />
+                  </Link>
+                  <div
+                    className="absolute bottom-4 right-4 bg-black bg-opacity-60 p-2 rounded-md"
+                    onClick={() => addFavouriteMovie(item)}
+                  >
+                    Bookmark
+                  </div>
+                </div>
               ))}
             </div>
           )}
@@ -188,13 +244,21 @@ const Categories = () => {
           {animation && (
             <div className="p-4 flex items-center overflow-x-scroll gap-1">
               {animation.map((item) => (
-                <Link key={item.id} to={`/info/${item.id}`}>
-                  <img
-                    className="hover:scale-105 transition-all category__image"
-                    src={poster + item.poster_path}
-                    alt={item.title}
-                  />
-                </Link>
+                <div className="relative">
+                  <Link key={item.id} to={`/info/${item.id}`}>
+                    <img
+                      className="hover:scale-105 transition-all category__image"
+                      src={poster + item.poster_path}
+                      alt={item.title}
+                    />
+                  </Link>
+                  <div
+                    className="absolute bottom-4 right-4 bg-black bg-opacity-60 p-2 rounded-md"
+                    onClick={() => addFavouriteMovie(item)}
+                  >
+                    Bookmark
+                  </div>
+                </div>
               ))}
             </div>
           )}
