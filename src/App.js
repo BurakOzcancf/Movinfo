@@ -9,7 +9,6 @@ const poster = "https://www.themoviedb.org/t/p/original/";
 
 function App() {
   const [favourites, setFavourites] = useState([]);
-
   const addFavouriteMovie = (movie) => {
     if (!favourites.includes(movie)) {
       const newFavouriteList = [...favourites, movie];
@@ -21,12 +20,24 @@ function App() {
       setFavourites(newFavouriteList);
     }
   };
+  function isBookmarked(id) {
+    let a = [];
+    favourites.map((item) => a.push(item.id));
+    console.log(a);
+    if (a.includes(id)) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
   const data = {
     baseURL,
     poster,
     favourites,
     setFavourites,
     addFavouriteMovie,
+    isBookmarked,
   };
   return (
     <MainContext.Provider value={data}>
