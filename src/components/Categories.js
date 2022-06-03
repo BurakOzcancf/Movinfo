@@ -1,9 +1,14 @@
-import React, { useState, useContext, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import { MainContext } from "./context";
 import axios from "axios";
-import { BsBookmarkFill } from "react-icons/bs";
-const Categories = () => {
+import { addBookmarks } from "../store/bookmarks-slice";
+import { connect, useDispatch } from "react-redux";
+import Bookmarks from "./Bookmarks";
+const mapStateToProps = (state) => ({
+  baseURL: state.info.baseURL,
+  poster: state.info.poster,
+});
+const Categories = ({ baseURL, poster }) => {
   const [query, setQuery] = useState("");
   const [search, setSearch] = useState("");
   const [topRated, setTopRated] = useState("");
@@ -13,8 +18,7 @@ const Categories = () => {
   const [someMovies, setSomeMovies] = useState("");
   const [comedy, setComedy] = useState("");
   const [animation, setAnimation] = useState("");
-  const { baseURL, poster, addFavouriteMovie, isBookmarked } =
-    useContext(MainContext);
+  const dispatch = useDispatch();
   useEffect(() => {
     if (query) {
       axios
@@ -90,8 +94,11 @@ const Categories = () => {
         <div className="grid p-4 gap-4 justify-center  sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 max-w-screen-xl m-auto">
           {search &&
             search.map((item) => (
-              <div className="group relative hover:scale-105 transition-all">
-                <Link key={item.id} to={`/info/${item.id}`}>
+              <div
+                key={item.id}
+                className="group relative hover:scale-105 transition-all"
+              >
+                <Link to={`/info/${item.id}`}>
                   <img
                     className="category__image max-w-xs m-auto"
                     src={poster + item.poster_path}
@@ -99,17 +106,12 @@ const Categories = () => {
                   />
                   {item.id}
                 </Link>
-                <div
-                  style={
-                    isBookmarked(item.id)
-                      ? { backgroundColor: "red" }
-                      : { backgroundColor: "blue" }
-                  }
-                  className="absolute bottom-4 right-4 bg-black bg-opacity-60 p-2 rounded-md"
-                  onClick={() => addFavouriteMovie(item)}
+                <span
+                  className="absolute group-hover:opacity-100 opacity-0 transition-all delay-300 w-full  bottom-0 right-0 bg-gradient-to-t from-black to-transparent bg-opacity-60 rounded-xl p-4 "
+                  onClick={() => dispatch(addBookmarks(item))}
                 >
-                  Bookmark
-                </div>
+                  <Bookmarks item={item.id} />
+                </span>
               </div>
             ))}
         </div>
@@ -132,18 +134,9 @@ const Categories = () => {
                   </Link>
                   <span
                     className="absolute group-hover:opacity-100 opacity-0 transition-all delay-300 w-full  bottom-0 right-0 bg-gradient-to-t from-black to-transparent bg-opacity-60 rounded-xl p-4 "
-                    onClick={() => addFavouriteMovie(item)}
+                    onClick={() => dispatch(addBookmarks(item))}
                   >
-                    <BsBookmarkFill
-                      className="text-xl ml-auto "
-                      style={
-                        isBookmarked(item.id)
-                          ? {
-                              fill: "rgb(234 179 8)",
-                            }
-                          : { fill: "white" }
-                      }
-                    />
+                    <Bookmarks item={item.id} />
                   </span>
                 </div>
               ))}
@@ -153,8 +146,11 @@ const Categories = () => {
           {popular && (
             <div className="p-4 relative flex items-center overflow-x-scroll gap-1">
               {popular.map((item) => (
-                <div className="group relative hover:scale-105 transition-all">
-                  <Link key={item.id} to={`/info/${item.id}`}>
+                <div
+                  key={item.id}
+                  className="group relative hover:scale-105 transition-all"
+                >
+                  <Link to={`/info/${item.id}`}>
                     <img
                       className="category__image"
                       src={poster + item.poster_path}
@@ -163,18 +159,9 @@ const Categories = () => {
                   </Link>
                   <span
                     className="absolute group-hover:opacity-100 opacity-0 transition-all delay-300 w-full  bottom-0 right-0 bg-gradient-to-t from-black to-transparent bg-opacity-60 rounded-xl p-4 "
-                    onClick={() => addFavouriteMovie(item)}
+                    onClick={() => dispatch(addBookmarks(item))}
                   >
-                    <BsBookmarkFill
-                      className="text-xl ml-auto "
-                      style={
-                        isBookmarked(item.id)
-                          ? {
-                              fill: "rgb(234 179 8)",
-                            }
-                          : { fill: "white" }
-                      }
-                    />
+                    <Bookmarks item={item.id} />
                   </span>
                 </div>
               ))}
@@ -184,8 +171,11 @@ const Categories = () => {
           {cult && (
             <div className="p-4 relative flex items-center overflow-x-scroll gap-1">
               {cult.map((item) => (
-                <div className="group relative hover:scale-105 transition-all">
-                  <Link key={item.id} to={`/info/${item.id}`}>
+                <div
+                  key={item.id}
+                  className="group relative hover:scale-105 transition-all"
+                >
+                  <Link to={`/info/${item.id}`}>
                     <img
                       className="category__image"
                       src={poster + item.poster_path}
@@ -194,18 +184,9 @@ const Categories = () => {
                   </Link>
                   <span
                     className="absolute group-hover:opacity-100 opacity-0 transition-all delay-300 w-full  bottom-0 right-0 bg-gradient-to-t from-black to-transparent bg-opacity-60 rounded-xl p-4 "
-                    onClick={() => addFavouriteMovie(item)}
+                    onClick={() => dispatch(addBookmarks(item))}
                   >
-                    <BsBookmarkFill
-                      className="text-xl ml-auto "
-                      style={
-                        isBookmarked(item.id)
-                          ? {
-                              fill: "rgb(234 179 8)",
-                            }
-                          : { fill: "white" }
-                      }
-                    />
+                    <Bookmarks item={item.id} />
                   </span>
                 </div>
               ))}
@@ -215,8 +196,11 @@ const Categories = () => {
           {acFi && (
             <div className="p-4 relative flex items-center overflow-x-scroll gap-1">
               {acFi.map((item) => (
-                <div className="group relative hover:scale-105 transition-all">
-                  <Link key={item.id} to={`/info/${item.id}`}>
+                <div
+                  key={item.id}
+                  className="group relative hover:scale-105 transition-all"
+                >
+                  <Link to={`/info/${item.id}`}>
                     <img
                       className="category__image"
                       src={poster + item.poster_path}
@@ -225,18 +209,9 @@ const Categories = () => {
                   </Link>
                   <span
                     className="absolute group-hover:opacity-100 opacity-0 transition-all delay-300 w-full  bottom-0 right-0 bg-gradient-to-t from-black to-transparent bg-opacity-60 rounded-xl p-4 "
-                    onClick={() => addFavouriteMovie(item)}
+                    onClick={() => dispatch(addBookmarks(item))}
                   >
-                    <BsBookmarkFill
-                      className="text-xl ml-auto "
-                      style={
-                        isBookmarked(item.id)
-                          ? {
-                              fill: "rgb(234 179 8)",
-                            }
-                          : { fill: "white" }
-                      }
-                    />
+                    <Bookmarks item={item.id} />
                   </span>
                 </div>
               ))}
@@ -246,8 +221,11 @@ const Categories = () => {
           {someMovies && (
             <div className="p-4 relative flex items-center overflow-x-scroll gap-1">
               {someMovies.map((item) => (
-                <div className="group relative hover:scale-105 transition-all">
-                  <Link key={item.id} to={`/info/${item.id}`}>
+                <div
+                  key={item.id}
+                  className="group relative hover:scale-105 transition-all"
+                >
+                  <Link to={`/info/${item.id}`}>
                     <img
                       className="category__image"
                       src={poster + item.poster_path}
@@ -256,18 +234,9 @@ const Categories = () => {
                   </Link>
                   <span
                     className="absolute group-hover:opacity-100 opacity-0 transition-all delay-300 w-full  bottom-0 right-0 bg-gradient-to-t from-black to-transparent bg-opacity-60 rounded-xl p-4 "
-                    onClick={() => addFavouriteMovie(item)}
+                    onClick={() => dispatch(addBookmarks(item))}
                   >
-                    <BsBookmarkFill
-                      className="text-xl ml-auto "
-                      style={
-                        isBookmarked(item.id)
-                          ? {
-                              fill: "rgb(234 179 8)",
-                            }
-                          : { fill: "white" }
-                      }
-                    />
+                    <Bookmarks item={item.id} />
                   </span>
                 </div>
               ))}
@@ -277,8 +246,11 @@ const Categories = () => {
           {comedy && (
             <div className="p-4 relative flex items-center overflow-x-scroll gap-1">
               {comedy.map((item) => (
-                <div className="group relative hover:scale-105 transition-all">
-                  <Link key={item.id} to={`/info/${item.id}`}>
+                <div
+                  key={item.id}
+                  className="group relative hover:scale-105 transition-all"
+                >
+                  <Link to={`/info/${item.id}`}>
                     <img
                       className="category__image"
                       src={poster + item.poster_path}
@@ -287,18 +259,9 @@ const Categories = () => {
                   </Link>
                   <span
                     className="absolute group-hover:opacity-100 opacity-0 transition-all delay-300 w-full  bottom-0 right-0 bg-gradient-to-t from-black to-transparent bg-opacity-60 rounded-xl p-4 "
-                    onClick={() => addFavouriteMovie(item)}
+                    onClick={() => dispatch(addBookmarks(item))}
                   >
-                    <BsBookmarkFill
-                      className="text-xl ml-auto "
-                      style={
-                        isBookmarked(item.id)
-                          ? {
-                              fill: "rgb(234 179 8)",
-                            }
-                          : { fill: "white" }
-                      }
-                    />
+                    <Bookmarks item={item.id} />
                   </span>
                 </div>
               ))}
@@ -308,8 +271,11 @@ const Categories = () => {
           {animation && (
             <div className="p-4 relative flex items-center overflow-x-scroll gap-1">
               {animation.map((item) => (
-                <div className="group relative hover:scale-105 transition-all">
-                  <Link key={item.id} to={`/info/${item.id}`}>
+                <div
+                  key={item.id}
+                  className="group relative hover:scale-105 transition-all"
+                >
+                  <Link to={`/info/${item.id}`}>
                     <img
                       className="category__image"
                       src={poster + item.poster_path}
@@ -318,18 +284,9 @@ const Categories = () => {
                   </Link>
                   <span
                     className="absolute group-hover:opacity-100 opacity-0 transition-all delay-300 w-full  bottom-0 right-0 bg-gradient-to-t from-black to-transparent bg-opacity-60 rounded-xl p-4 "
-                    onClick={() => addFavouriteMovie(item)}
+                    onClick={() => dispatch(addBookmarks(item))}
                   >
-                    <BsBookmarkFill
-                      className="text-xl ml-auto "
-                      style={
-                        isBookmarked(item.id)
-                          ? {
-                              fill: "rgb(234 179 8)",
-                            }
-                          : { fill: "white" }
-                      }
-                    />
+                    <Bookmarks item={item.id} />
                   </span>
                 </div>
               ))}
@@ -341,4 +298,4 @@ const Categories = () => {
   );
 };
 
-export default Categories;
+export default connect(mapStateToProps)(Categories);

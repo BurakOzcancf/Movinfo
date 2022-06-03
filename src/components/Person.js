@@ -1,10 +1,13 @@
-import React, { useEffect, useState, useContext } from "react";
+import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { Link, useParams } from "react-router-dom";
-import { MainContext } from "./context";
-const Person = () => {
+import { connect } from "react-redux";
+const mapStateToProps = (state) => ({
+  baseURL: state.info.baseURL,
+  poster: state.info.poster,
+});
+const Person = (baseURL, poster) => {
   const params = useParams();
-  const { baseURL, poster } = useContext(MainContext);
   const [person, setPerson] = useState("");
   // const [photo, setPhoto] = useState("");
   const [personMovie, setPersonMovie] = useState("");
@@ -70,4 +73,4 @@ const Person = () => {
   );
 };
 
-export default Person;
+export default connect(mapStateToProps)(Person);

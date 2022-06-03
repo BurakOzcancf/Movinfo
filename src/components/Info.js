@@ -1,13 +1,16 @@
-import React, { useEffect, useState, useContext } from "react";
+import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { useParams } from "react-router-dom";
 import { Link } from "react-router-dom";
-import { MainContext } from "./context";
 import defaulProfile from "./assets/defaultProfile.PNG";
-const Info = () => {
+import { connect } from "react-redux";
+const mapStateToProps = (state) => ({
+  baseURL: state.info.baseURL,
+  poster: state.info.poster,
+});
+const Info = (baseURL, poster) => {
   const params = useParams();
   const [movinfo, setMovinfo] = useState("");
-  const { baseURL, poster } = useContext(MainContext);
   const [similar, setSimilar] = useState("");
   const [cast, setCast] = useState("");
   useEffect(() => {
@@ -137,4 +140,4 @@ const Info = () => {
   );
 };
 
-export default Info;
+export default connect(mapStateToProps)(Info);
