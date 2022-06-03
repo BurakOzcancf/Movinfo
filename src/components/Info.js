@@ -8,7 +8,7 @@ const mapStateToProps = (state) => ({
   baseURL: state.info.baseURL,
   poster: state.info.poster,
 });
-const Info = (baseURL, poster) => {
+const Info = ({ baseURL, poster }) => {
   const params = useParams();
   const [movinfo, setMovinfo] = useState("");
   const [similar, setSimilar] = useState("");

@@ -6,7 +6,7 @@ const mapStateToProps = (state) => ({
   baseURL: state.info.baseURL,
   poster: state.info.poster,
 });
-const Person = (baseURL, poster) => {
+const Person = ({ baseURL, poster }) => {
   const params = useParams();
   const [person, setPerson] = useState("");
   // const [photo, setPhoto] = useState("");
