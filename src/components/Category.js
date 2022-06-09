@@ -2,15 +2,17 @@ import React from "react";
 import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 import { addBookmarks } from "../store/bookmarks-slice";
-import Bookmarks from "./Bookmarks";
+import Bookmarks from "./Mark";
 const Category = ({ heading, movies }) => {
   const dispatch = useDispatch();
   const poster = "https://www.themoviedb.org/t/p/original/";
   return (
     <div>
-      <h2 className="px-4 text-xl mt-4">{heading} </h2>
-      {movies && (
-        <div className="p-4 relative flex items-center overflow-x-scroll gap-1">
+      <h2 className="px-4 text-center font-medium text-4xl mt-8 mb-4">
+        {heading}{" "}
+      </h2>
+      {movies ? (
+        <div className="p-4 relative items-center gap-2 grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 max-w-5xl justify-center m-auto ">
           {movies.map((item) => (
             <div
               key={item.id}
@@ -32,6 +34,8 @@ const Category = ({ heading, movies }) => {
             </div>
           ))}
         </div>
+      ) : (
+        "Loading"
       )}
     </div>
   );

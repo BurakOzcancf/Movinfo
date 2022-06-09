@@ -3,13 +3,15 @@
 @tailwind utilities;
 
 body {
-  background-color: rgb(47, 47, 47);
-  color: white;
+  background-color: rgb(240, 240, 240);
+  color: orange;
+  min-height: 100vh;
+  position: relative;
 }
-.header__image,
+/* .header__image,
 .category__image,
 .info__image {
-  min-width: 15rem;
+  min-width: 10rem;
 }
 
 @media only screen and (min-width: 640px) {
@@ -24,7 +26,7 @@ body {
   .header__image {
     max-width: 15rem;
   }
-}
+} */
 
 img {
   border-radius: 1rem;
@@ -33,7 +35,6 @@ img {
 ::-webkit-scrollbar-thumb {
   background-color: #facc1560;
   transition: 0.5s;
-  border-radius: 1rem;
 }
 ::-webkit-scrollbar-thumb:hover {
   background-color: #facc1590;
@@ -41,6 +42,5 @@ img {
 ::-webkit-scrollbar {
   height: 0.5rem;
   width: 0.8rem;
-  border-radius: 1rem;
   background-color: rgb(24, 24, 24);
 }

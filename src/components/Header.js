@@ -1,162 +1,92 @@
-import React, { useEffect, useState } from "react";
-import axios from "axios";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import Bookmarks from "./Bookmarks";
-import { addBookmarks } from "../store/bookmarks-slice";
-import { connect, useDispatch } from "react-redux";
-const mapStateToProps = (state) => ({
-  baseURL: state.info.baseURL,
-  poster: state.info.poster,
-  bookmarks: state.bookmark.bookmarks,
-});
-const Header = ({ baseURL, poster, bookmarks }) => {
-  const [header, setHeader] = useState(null);
-  const dispatch = useDispatch();
+import { AiFillFire } from "react-icons/ai";
+import { RiBarChart2Fill } from "react-icons/ri";
+import { BsBookmarkFill } from "react-icons/bs";
+import { BsCameraReelsFill } from "react-icons/bs";
+import { BsFillDisplayFill } from "react-icons/bs";
+import { HiMenuAlt3 } from "react-icons/hi";
 
-  useEffect(() => {
-    axios
-      .get(
-        `${baseURL}/movie/now_playing?api_key=${process.env.REACT_APP_API}&language=en-US&page=1`
-      )
-      .then((response) => {
-        setHeader(response.data.results);
-      });
-  }, [baseURL]);
-
+const Header = () => {
+  const [isOpen, setIsOpen] = useState(false);
   return (
-    <header className="my-4">
-      <h2 className="p-4 text-3xl lg:mb-2 lg:text-center">Now Playing</h2>
-      {header !== null && (
-        <div className="p-4 flex items-center overflow-x-scroll gap-1 sm:hidden ">
-          {header.map((item) => (
-            <div
-              key={item.id}
-              className="relative group py-2 hover:scale-105 transition-all"
+    <div className="py-2 border-b-2 bg-gray-800 border-gray-50 flex items-center justify-between">
+      <Link to={"/"} className="mx-8">
+        <h1 className="text-4xl m-auto font-bold text-yellow-500">Movinfos</h1>
+      </Link>
+      <HiMenuAlt3
+        onClick={() => setIsOpen(!isOpen)}
+        className="text-2xl z-30 ml-auto md:hidden"
+      />
+      <nav
+        onClick={() => setIsOpen(false)}
+        className={isOpen ? "grid" : "hidden md:grid"}
+      >
+        <ul className="fixed p-40 md:px-4 gap-2 md:relative md:bg-transparent md:h-auto md:flex md:p-0 w-full bg-black bg-opacity-80 h-full z-10 top-0 left-0 grid justify-center items-center">
+          <li className="md:hidden">
+            <Link
+              onClick={() => setIsOpen(false)}
+              className="group md:flex-row-reverse flex items-center text-white hover:text-yellow-500"
+              to={"/"}
             >
-              <Link to={`/info/${item.id}`}>
-                <img
-                  className="header__image"
-                  src={poster + item.poster_path}
-                  alt={item.id}
-                />
-              </Link>
-              <span
-                className="absolute group-hover:opacity-100 opacity-0 transition-all delay-300 w-full  bottom-0 right-0 bg-gradient-to-t from-black to-transparent bg-opacity-60 rounded-xl p-6 "
-                onClick={() => {
-                  dispatch(addBookmarks(item));
-                }}
-              >
-                <Bookmarks item={item.id} />
-              </span>
-            </div>
-          ))}
-        </div>
-      )}
-      {header !== null && (
-        <ul className="hidden w-full sm:flex items-center justify-center gap-4">
-          <li className="hidden group xl:block hover:z-30 scale-95 relative hover:scale-105 transition-all">
-            <div>
-              <Link to={`/info/${header[3].id}`}>
-                <img
-                  className="header__image"
-                  src={poster + header[3].poster_path}
-                  alt={header[3].title}
-                />
-              </Link>
-              <span
-                className="absolute group-hover:opacity-100 opacity-0 transition-all delay-300 w-full  bottom-0 right-0 bg-gradient-to-t from-black to-transparent bg-opacity-60 rounded-xl p-4 "
-                onClick={() => dispatch(addBookmarks(header[3]))}
-              >
-                <Bookmarks item={header[3].id} />
-              </span>
-            </div>
-          </li>
-          <li className="group -ml-12 z-10 hover:z-30 relative hover:scale-105 transition-all">
-            <Link to={`/info/${header[1].id}`}>
-              <img
-                className="header__image"
-                src={poster + header[1].poster_path}
-                alt={header[1].title}
-              />
+              <span className="w-11/12 text-2xl md:text-base">Home</span>
+              <AiFillFire className=" fill-white group-hover:fill-yellow-500 transition-all text-2xl" />
             </Link>
-            <span
-              className="absolute group-hover:opacity-100 opacity-0 transition-all delay-300 w-full bottom-0 right-0 bg-gradient-to-t from-black to-transparent bg-opacity-60 rounded-xl p-4 "
-              onClick={() => dispatch(addBookmarks(header[1]))}
-            >
-              <Bookmarks item={header[1].id} />
-            </span>
           </li>
-          <li className="group -mx-12 z-20 relative hover:scale-105 transition-all ">
-            <Link to={`/info/${header[0].id}`}>
-              <img
-                className="header__image"
-                src={poster + header[0].poster_path}
-                alt={header[0].title}
-              />
+          <li>
+            <Link
+              onClick={() => setIsOpen(false)}
+              className="group md:flex-row-reverse flex items-center text-white hover:text-yellow-500"
+              to={"/trends"}
+            >
+              <span className="w-11/12 text-2xl md:text-base">Trends</span>
+              <AiFillFire className=" fill-white group-hover:fill-yellow-500 transition-all text-2xl" />
             </Link>
-            <span
-              className="absolute group-hover:opacity-100 opacity-0 transition-all delay-300 w-full  bottom-0 right-0 bg-gradient-to-t from-black to-transparent bg-opacity-60 rounded-xl p-4 "
-              onClick={() => dispatch(addBookmarks(header[0]))}
-            >
-              <Bookmarks item={header[0].id} />
-            </span>
           </li>
-          <li className="group -mr-12 z-10 hover:z-30 relative hover:scale-105 transition-all">
-            <Link to={`/info/${header[2].id}`}>
-              <img
-                className="header__image"
-                src={poster + header[2].poster_path}
-                alt={header[2].title}
-              />
+          <li>
+            <Link
+              onClick={() => setIsOpen(false)}
+              className="group md:flex-row-reverse flex items-center text-white hover:text-yellow-500"
+              to={"/top_rated"}
+            >
+              <span className="w-11/12 text-2xl md:text-base">Top Rated</span>
+              <RiBarChart2Fill className=" fill-white group-hover:fill-yellow-500 transition-all text-2xl" />
             </Link>
-            <span
-              className="absolute group-hover:opacity-100 opacity-0 transition-all delay-300 w-full  bottom-0 right-0 bg-gradient-to-t from-black to-transparent bg-opacity-60 rounded-xl p-4 "
-              onClick={() => dispatch(addBookmarks(header[2]))}
-            >
-              <Bookmarks item={header[2].id} />
-            </span>
           </li>
-          <li className="group hidden xl:block z-0 hover:z-30 scale-95 relative hover:scale-105 transition-all">
-            <div>
-              <Link to={`/info/${header[4].id}`}>
-                <img
-                  className="hidden xl:block z-0 header__image"
-                  src={poster + header[4].poster_path}
-                  alt={header[4].title}
-                />
-              </Link>
-              <span
-                className="absolute group-hover:opacity-100 opacity-0 transition-all delay-300 w-full  bottom-0 right-0 bg-gradient-to-t from-black to-transparent bg-opacity-60 rounded-xl p-4 "
-                onClick={() => dispatch(addBookmarks(header[4]))}
-              >
-                <Bookmarks item={header[4].id} />
-              </span>
-            </div>
+          <li>
+            <Link
+              onClick={() => setIsOpen(false)}
+              className="group md:flex-row-reverse flex items-center text-white hover:text-yellow-500"
+              to={"/movie"}
+            >
+              <span className="w-11/12 text-2xl md:text-base ">Movies</span>
+              <BsCameraReelsFill className=" fill-white group-hover:fill-yellow-500 transition-all text-xl" />
+            </Link>
+          </li>
+          <li>
+            <Link
+              onClick={() => setIsOpen(false)}
+              className="group flex items-center text-white hover:text-yellow-500"
+              to={"/tv"}
+            >
+              <span className="w-11/12 text-2xl md:text-base">Series</span>
+              <BsFillDisplayFill className=" fill-white group-hover:fill-yellow-500 transition-all text-2xl" />
+            </Link>
+          </li>
+          <li>
+            <Link
+              onClick={() => setIsOpen(false)}
+              className="group flex items-center text-white hover:text-yellow-500"
+              to={"/bookmarks"}
+            >
+              <span className="w-11/12 text-2xl md:text-base">Bookmarks</span>
+              <BsBookmarkFill className=" fill-white group-hover:fill-yellow-500 transition-all text-xl" />
+            </Link>
           </li>
         </ul>
-      )}
-      {bookmarks[0] && <h2 className="text-3xl p-4">Bookmarks</h2>}
-      <div className="flex items-center overflow-x-auto gap-1 p-4">
-        {bookmarks?.map((item) => (
-          <div key={item.id} className="relative group">
-            <Link to={`/info/${item.id}`}>
-              <img
-                className="header__image"
-                src={poster + item.poster_path}
-                alt={item.id}
-              />
-            </Link>
-            <span
-              className="absolute group-hover:opacity-100 opacity-0 transition-all delay-300 w-full  bottom-0 right-0 bg-gradient-to-t from-black to-transparent bg-opacity-60 rounded-xl p-4 "
-              onClick={() => dispatch(addBookmarks(item))}
-            >
-              <Bookmarks item={item.id} />
-            </span>
-          </div>
-        ))}
-      </div>
-    </header>
+      </nav>
+    </div>
   );
 };
 
-export default connect(mapStateToProps)(Header);
+export default Header;
