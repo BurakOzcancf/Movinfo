@@ -16,7 +16,7 @@ const Header = () => {
       </Link>
       <HiMenuAlt3
         onClick={() => setIsOpen(!isOpen)}
-        className="text-2xl z-30 ml-auto md:hidden"
+        className="text-2xl z-30 ml-auto md:hidden text-yellow-500"
       />
       <nav
         onClick={() => setIsOpen(false)}

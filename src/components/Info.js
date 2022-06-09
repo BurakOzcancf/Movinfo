@@ -109,7 +109,7 @@ const Info = ({ baseURL, poster, type }) => {
               ))}
             </div>
           )}
-          <h2 className="text-yellow-400 text-2xl mt-4 font-bold p-4">Cast</h2>
+          <h2 className="text-gray-800 text-2xl mt-4 font-bold p-4">Cast</h2>
           {cast && (
             <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-y-8">
               {cast.map((item) => (

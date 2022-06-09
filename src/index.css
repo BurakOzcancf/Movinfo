@@ -4,9 +4,9 @@
 
 body {
   background-color: rgb(240, 240, 240);
-  color: orange;
   min-height: 100vh;
   position: relative;
+  color: rgb(31 41 55);
 }
 /* .header__image,
 .category__image,
