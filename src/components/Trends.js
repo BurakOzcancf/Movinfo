@@ -32,8 +32,8 @@ const Trends = () => {
   }, []);
   return (
     <div>
-      <Category heading={"Trends Series"} movies={trendTv} />
-      <Category heading={"Trends Movie"} movies={trends} />
+      <Category type={"tv"} heading={"Trends Series"} movies={trendTv} />
+      <Category type={"movie"} heading={"Trends Movie"} movies={trends} />
       {trendPerson && (
         <div className="p-4 relative grid grid-flow-col-dense items-center overflow-x-scroll gap-1">
           {trendPerson.map((item) => (

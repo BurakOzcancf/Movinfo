@@ -7,8 +7,9 @@ import { connect } from "react-redux";
 const mapStateToProps = (state) => ({
   baseURL: state.info.baseURL,
   poster: state.info.poster,
+  type: state.info.type,
 });
-const Info = ({ baseURL, poster }) => {
+const Info = ({ baseURL, poster, type }) => {
   const params = useParams();
   const [movinfo, setMovinfo] = useState("");
   const [similar, setSimilar] = useState("");
@@ -16,14 +17,14 @@ const Info = ({ baseURL, poster }) => {
   useEffect(() => {
     axios
       .get(
-        `${baseURL}/movie/${params.id}?api_key=${process.env.REACT_APP_API}&language=en-US`
+        `${baseURL}/${type}/${params.id}?api_key=${process.env.REACT_APP_API}&language=en-US`
       )
       .then((response) => {
         setMovinfo(response.data);
       });
     axios
       .get(
-        `${baseURL}/movie/${params.id}/similar?api_key=${process.env.REACT_APP_API}&language=en-US&page=1`
+        `${baseURL}/${type}/${params.id}/similar?api_key=${process.env.REACT_APP_API}&language=en-US&page=1`
       )
       .then((response) => {
         setSimilar(response.data.results);
@@ -31,13 +32,13 @@ const Info = ({ baseURL, poster }) => {
 
     axios
       .get(
-        `${baseURL}/movie/${params.id}/credits?api_key=${process.env.REACT_APP_API}&language=en-US`
+        `${baseURL}/${type}/${params.id}/credits?api_key=${process.env.REACT_APP_API}&language=en-US`
       )
       .then((response) => {
         setCast(response.data.cast);
       });
-  }, [params, baseURL]);
-
+  }, [params, baseURL, type]);
+  console.log(type);
   return (
     <div>
       {movinfo && (
@@ -93,7 +94,9 @@ const Info = ({ baseURL, poster }) => {
               </span>
             </li>
           </ul>
-          <h2 className="text-2xl">Similar Movies</h2>
+          <h2 className="text-2xl">
+            Similar {type === "tv" ? "Series" : "Movies"}
+          </h2>
           {similar && (
             <div className="flex overflow-x-auto gap-2 p-2">
               {similar.map((item) => (

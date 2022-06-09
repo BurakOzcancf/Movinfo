@@ -15,7 +15,7 @@ const TopRated = () => {
 
   return (
     <div>
-      <Category heading={"Top Rated"} movies={topRated} />
+      <Category type={"movie"} heading={"Top Rated"} movies={topRated} />
     </div>
   );
 };

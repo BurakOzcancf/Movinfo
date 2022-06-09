@@ -15,7 +15,7 @@ const Movie = () => {
   const [popular, setPopular] = useState("");
   return (
     <div>
-      <Category heading={"Popular Movies"} movies={popular} />
+      <Category type={"movie"} heading={"Popular Movies"} movies={popular} />
     </div>
   );
 };

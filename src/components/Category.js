@@ -2,8 +2,9 @@ import React from "react";
 import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 import { addBookmarks } from "../store/bookmarks-slice";
+import { types } from "../store/info-slice";
 import Bookmarks from "./Mark";
-const Category = ({ heading, movies }) => {
+const Category = ({ heading, movies, type }) => {
   const dispatch = useDispatch();
   const poster = "https://www.themoviedb.org/t/p/original/";
   return (
@@ -18,7 +19,10 @@ const Category = ({ heading, movies }) => {
               key={item.id}
               className="group relative hover:scale-105 transition-all"
             >
-              <Link to={`/info/${item.id}`}>
+              <Link
+                onClick={() => dispatch(types(type))}
+                to={`/info/${item.id}`}
+              >
                 <img
                   className="category__image"
                   src={poster + item.poster_path}

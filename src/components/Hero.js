@@ -27,7 +27,7 @@ const Hero = ({ baseURL, poster, bookmarks }) => {
   return (
     <header className="my-4">
       <div className="sm:hidden">
-        <Category heading={"Now Playing"} movies={header} />
+        <Category type={"movie"} heading={"Now Playing"} movies={header} />
       </div>
 
       {header !== null && (
