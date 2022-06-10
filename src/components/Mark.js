@@ -1,13 +1,10 @@
 import React from "react";
 import { BsBookmarkFill } from "react-icons/bs";
-import { useSelector } from "react-redux";
 
-const Bookmarks = ({ item }) => {
-  const bookmarks = useSelector((state) => state.bookmark.bookmarks);
-
+const Mark = ({ item, category }) => {
   function isBookmarked() {
     const a = [];
-    bookmarks.map((items) => a.push(items.id));
+    category.map((items) => a.push(items.id));
     if (a.includes(item)) {
       return true;
     } else {
@@ -31,5 +28,4 @@ const Bookmarks = ({ item }) => {
     </>
   );
 };
-
-export default Bookmarks;
+export default Mark;

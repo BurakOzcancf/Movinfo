@@ -2,8 +2,12 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import Category from "./Category";
 import { Link } from "react-router-dom";
+import { addFavMovie, addFavSerie } from "../store/bookmarks-slice";
 import defaulProfile from "./assets/defaultProfile.PNG";
+import { useSelector } from "react-redux";
 const Trends = () => {
+  const serie = useSelector((state) => state.bookmark.favSerie);
+  const movie = useSelector((state) => state.bookmark.favMovie);
   const [trends, setTrends] = useState("");
   const [trendTv, setTrendTv] = useState("");
   const [trendPerson, setTrendPerson] = useState("");
@@ -32,8 +36,20 @@ const Trends = () => {
   }, []);
   return (
     <div>
-      <Category type={"tv"} heading={"Trends Series"} movies={trendTv} />
-      <Category type={"movie"} heading={"Trends Movie"} movies={trends} />
+      <Category
+        category={serie}
+        type={"tv"}
+        heading={"Trends Series"}
+        movies={trendTv}
+        add={addFavSerie}
+      />
+      <Category
+        add={addFavMovie}
+        category={movie}
+        type={"movie"}
+        heading={"Trends Movie"}
+        movies={trends}
+      />
       {trendPerson && (
         <div className="p-4 relative grid grid-flow-col-dense items-center overflow-x-scroll gap-1">
           {trendPerson.map((item) => (

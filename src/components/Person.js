@@ -2,12 +2,14 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { Link, useParams } from "react-router-dom";
 import defaulProfile from "./assets/defaultProfile.PNG";
-import { connect } from "react-redux";
+import { connect, useDispatch } from "react-redux";
+import { types } from "../store/info-slice";
 const mapStateToProps = (state) => ({
   baseURL: state.info.baseURL,
   poster: state.info.poster,
 });
 const Person = ({ baseURL, poster }) => {
+  const dispatch = useDispatch();
   const params = useParams();
   const [person, setPerson] = useState("");
   // const [photo, setPhoto] = useState("");
@@ -35,7 +37,6 @@ const Person = ({ baseURL, poster }) => {
         setPersonMovie(response.data.cast);
       });
   }, [params, baseURL]);
-  console.log(person);
   return (
     <div>
       <div className="lg:flex p-4 max-w-7xl m-auto">
@@ -63,7 +64,11 @@ const Person = ({ baseURL, poster }) => {
       {personMovie && (
         <div className="p-4 flex items-center overflow-x-scroll gap-1">
           {personMovie.map((item) => (
-            <Link key={item.id} to={`/info/${item.id}`}>
+            <Link
+              key={item.id}
+              onClick={() => dispatch(types("movie"))}
+              to={`/info/${item.id}`}
+            >
               <img
                 src={poster + item.poster_path}
                 alt={item.name}

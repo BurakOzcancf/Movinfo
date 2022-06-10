@@ -1,10 +1,9 @@
 import React from "react";
 import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
-import { addBookmarks } from "../store/bookmarks-slice";
 import { types } from "../store/info-slice";
-import Bookmarks from "./Mark";
-const Category = ({ heading, movies, type }) => {
+import Mark from "./Mark";
+const Category = ({ heading, movies, type, add, category }) => {
   const dispatch = useDispatch();
   const poster = "https://www.themoviedb.org/t/p/original/";
   return (
@@ -31,9 +30,9 @@ const Category = ({ heading, movies, type }) => {
               </Link>
               <span
                 className="absolute group-hover:opacity-100 opacity-0 transition-all delay-300 w-full  bottom-0 right-0 bg-gradient-to-t from-black to-transparent bg-opacity-60 rounded-xl p-4 "
-                onClick={() => dispatch(addBookmarks(item))}
+                onClick={() => dispatch(add(item))}
               >
-                <Bookmarks item={item.id} />
+                <Mark category={category} item={item.id} />
               </span>
             </div>
           ))}

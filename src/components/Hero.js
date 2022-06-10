@@ -2,15 +2,16 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
 import Mark from "./Mark";
-import { addBookmarks } from "../store/bookmarks-slice";
+import { addFavMovie } from "../store/bookmarks-slice";
+import { types } from "../store/info-slice";
 import { connect, useDispatch } from "react-redux";
 import Category from "./Category";
 const mapStateToProps = (state) => ({
   baseURL: state.info.baseURL,
   poster: state.info.poster,
-  bookmarks: state.bookmark.bookmarks,
+  movie: state.bookmark.favMovie,
 });
-const Hero = ({ baseURL, poster, bookmarks }) => {
+const Hero = ({ baseURL, poster, movie }) => {
   const [header, setHeader] = useState(null);
   const dispatch = useDispatch();
 
@@ -23,97 +24,122 @@ const Hero = ({ baseURL, poster, bookmarks }) => {
         setHeader(response.data.results);
       });
   }, [baseURL]);
-  console.log(bookmarks);
   return (
-    <header className="my-4">
-      <div className="sm:hidden">
-        <Category type={"movie"} heading={"Now Playing"} movies={header} />
-      </div>
+    <main className="my-4">
+      <section className="sm:hidden">
+        <Category
+          add={addFavMovie}
+          category={movie}
+          type={"movie"}
+          heading={"Now Playing"}
+          movies={header}
+        />
+      </section>
 
       {header !== null && (
-        <ul className="hidden w-full sm:flex items-center justify-center gap-4">
-          <li className="hidden group xl:block hover:z-30 scale-95 relative hover:scale-105 transition-all">
-            <div>
-              <Link to={`/info/${header[3].id}`}>
+        <section className="px-8">
+          <h1 className="text-center text-5xl py-4 mb-4 hidden sm:block">
+            Now Playing
+          </h1>
+          <ul className="hidden w-full sm:flex items-center justify-center gap-4 px-10">
+            <li className="hidden group xl:block hover:z-30 scale-95 relative hover:scale-105 transition-all">
+              <div>
+                <Link
+                  to={`/info/${header[3].id}`}
+                  onClick={() => dispatch(types("movie"))}
+                >
+                  <img
+                    className="header__image"
+                    src={poster + header[3].poster_path}
+                    alt={header[3].title}
+                  />
+                </Link>
+                <span
+                  className="absolute group-hover:opacity-100 opacity-0 transition-all delay-300 w-full  bottom-0 right-0 bg-gradient-to-t from-black to-transparent bg-opacity-60 rounded-xl p-4 "
+                  onClick={() => dispatch(addFavMovie(header[3]))}
+                >
+                  <Mark category={movie} item={header[3].id} />
+                </span>
+              </div>
+            </li>
+            <li className="group -ml-12 z-10 hover:z-30 relative hover:scale-105 transition-all">
+              <Link
+                to={`/info/${header[1].id}`}
+                onClick={() => dispatch(types("movie"))}
+              >
                 <img
                   className="header__image"
-                  src={poster + header[3].poster_path}
-                  alt={header[3].title}
+                  src={poster + header[1].poster_path}
+                  alt={header[1].title}
                 />
               </Link>
               <span
-                className="absolute group-hover:opacity-100 opacity-0 transition-all delay-300 w-full  bottom-0 right-0 bg-gradient-to-t from-black to-transparent bg-opacity-60 rounded-xl p-4 "
-                onClick={() => dispatch(addBookmarks(header[3]))}
+                className="absolute group-hover:opacity-100 opacity-0 transition-all delay-300 w-full bottom-0 right-0 bg-gradient-to-t from-black to-transparent bg-opacity-60 rounded-xl p-4 "
+                onClick={() => dispatch(addFavMovie(header[1]))}
               >
-                <Mark item={header[3].id} />
+                <Mark category={movie} item={header[1].id} />
               </span>
-            </div>
-          </li>
-          <li className="group -ml-12 z-10 hover:z-30 relative hover:scale-105 transition-all">
-            <Link to={`/info/${header[1].id}`}>
-              <img
-                className="header__image"
-                src={poster + header[1].poster_path}
-                alt={header[1].title}
-              />
-            </Link>
-            <span
-              className="absolute group-hover:opacity-100 opacity-0 transition-all delay-300 w-full bottom-0 right-0 bg-gradient-to-t from-black to-transparent bg-opacity-60 rounded-xl p-4 "
-              onClick={() => dispatch(addBookmarks(header[1]))}
-            >
-              <Mark item={header[1].id} />
-            </span>
-          </li>
-          <li className="group -mx-12 z-20 relative hover:scale-105 transition-all ">
-            <Link to={`/info/${header[0].id}`}>
-              <img
-                className="header__image"
-                src={poster + header[0].poster_path}
-                alt={header[0].title}
-              />
-            </Link>
-            <span
-              className="absolute group-hover:opacity-100 opacity-0 transition-all delay-300 w-full  bottom-0 right-0 bg-gradient-to-t from-black to-transparent bg-opacity-60 rounded-xl p-4 "
-              onClick={() => dispatch(addBookmarks(header[0]))}
-            >
-              <Mark item={header[0].id} />
-            </span>
-          </li>
-          <li className="group -mr-12 z-10 hover:z-30 relative hover:scale-105 transition-all">
-            <Link to={`/info/${header[2].id}`}>
-              <img
-                className="header__image"
-                src={poster + header[2].poster_path}
-                alt={header[2].title}
-              />
-            </Link>
-            <span
-              className="absolute group-hover:opacity-100 opacity-0 transition-all delay-300 w-full  bottom-0 right-0 bg-gradient-to-t from-black to-transparent bg-opacity-60 rounded-xl p-4 "
-              onClick={() => dispatch(addBookmarks(header[2]))}
-            >
-              <Mark item={header[2].id} />
-            </span>
-          </li>
-          <li className="group hidden xl:block z-0 hover:z-30 scale-95 relative hover:scale-105 transition-all">
-            <div>
-              <Link to={`/info/${header[4].id}`}>
+            </li>
+            <li className="group -mx-12 z-20 relative hover:scale-105 transition-all ">
+              <Link
+                to={`/info/${header[0].id}`}
+                onClick={() => dispatch(types("movie"))}
+              >
                 <img
-                  className="hidden xl:block z-0 header__image"
-                  src={poster + header[4].poster_path}
-                  alt={header[4].title}
+                  className="header__image"
+                  src={poster + header[0].poster_path}
+                  alt={header[0].title}
                 />
               </Link>
               <span
                 className="absolute group-hover:opacity-100 opacity-0 transition-all delay-300 w-full  bottom-0 right-0 bg-gradient-to-t from-black to-transparent bg-opacity-60 rounded-xl p-4 "
-                onClick={() => dispatch(addBookmarks(header[4]))}
+                onClick={() => dispatch(addFavMovie(header[0]))}
               >
-                <Mark item={header[4].id} />
+                <Mark category={movie} item={header[0].id} />
               </span>
-            </div>
-          </li>
-        </ul>
+            </li>
+            <li className="group -mr-12 z-10 hover:z-30 relative hover:scale-105 transition-all">
+              <Link
+                to={`/info/${header[2].id}`}
+                onClick={() => dispatch(types("movie"))}
+              >
+                <img
+                  className="header__image"
+                  src={poster + header[2].poster_path}
+                  alt={header[2].title}
+                />
+              </Link>
+              <span
+                className="absolute group-hover:opacity-100 opacity-0 transition-all delay-300 w-full  bottom-0 right-0 bg-gradient-to-t from-black to-transparent bg-opacity-60 rounded-xl p-4 "
+                onClick={() => dispatch(addFavMovie(header[2]))}
+              >
+                <Mark category={movie} item={header[2].id} />
+              </span>
+            </li>
+            <li className="group hidden xl:block z-0 hover:z-30 scale-95 relative hover:scale-105 transition-all">
+              <div>
+                <Link
+                  to={`/info/${header[4].id}`}
+                  onClick={() => dispatch(types("movie"))}
+                >
+                  <img
+                    className="hidden xl:block z-0 header__image"
+                    src={poster + header[4].poster_path}
+                    alt={header[4].title}
+                  />
+                </Link>
+                <span
+                  className="absolute group-hover:opacity-100 opacity-0 transition-all delay-300 w-full  bottom-0 right-0 bg-gradient-to-t from-black to-transparent bg-opacity-60 rounded-xl p-4 "
+                  onClick={() => dispatch(addFavMovie(header[4]))}
+                >
+                  <Mark category={movie} item={header[4].id} />
+                </span>
+              </div>
+            </li>
+          </ul>
+        </section>
       )}
-    </header>
+    </main>
   );
 };
 

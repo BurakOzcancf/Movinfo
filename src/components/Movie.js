@@ -1,7 +1,10 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
+import { addFavMovie } from "../store/bookmarks-slice";
 import Category from "./Category";
 const Movie = () => {
+  const movie = useSelector((state) => state.bookmark.favMovie);
   useEffect(() => {
     axios
       .get(
@@ -15,7 +18,13 @@ const Movie = () => {
   const [popular, setPopular] = useState("");
   return (
     <div>
-      <Category type={"movie"} heading={"Popular Movies"} movies={popular} />
+      <Category
+        category={movie}
+        type={"movie"}
+        add={addFavMovie}
+        heading={"Popular Movies"}
+        movies={popular}
+      />
     </div>
   );
 };
