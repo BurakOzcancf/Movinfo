@@ -16,13 +16,13 @@ const Header = () => {
       </Link>
       <HiMenuAlt3
         onClick={() => setIsOpen(!isOpen)}
-        className="text-2xl z-50 ml-auto md:hidden text-yellow-500"
+        className="text-2xl z-50 ml-auto md:hidden text-yellow-500 mx-8"
       />
       <nav
         onClick={() => setIsOpen(false)}
         className={isOpen ? "grid" : "hidden md:grid"}
       >
-        <ul className="fixed z-40 p-40 md:px-4 gap-2 md:relative md:bg-transparent md:h-auto md:flex md:p-0 w-full bg-black bg-opacity-80 h-full top-0 left-0 grid justify-center items-center">
+        <ul className="fixed z-40 p-40 md:px-4 gap-2 md:relative md:bg-transparent md:h-auto md:flex md:p-0 w-full bg-black bg-opacity-90 h-full top-0 left-0 grid justify-center items-center">
           <li className="md:hidden">
             <Link
               onClick={() => setIsOpen(false)}

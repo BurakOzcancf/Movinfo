@@ -1,10 +1,8 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
-import { addFavMovie } from "../store/bookmarks-slice";
-import Category from "./Category";
+import PatternMovie from "../patterns/PatternMovie";
 const Movie = () => {
-  const movie = useSelector((state) => state.bookmark.favMovie);
+  const [popular, setPopular] = useState("");
   useEffect(() => {
     axios
       .get(
@@ -14,17 +12,10 @@ const Movie = () => {
         setPopular(response.data.results);
       });
   }, []);
-
-  const [popular, setPopular] = useState("");
+  console.log(popular);
   return (
     <div>
-      <Category
-        category={movie}
-        type={"movie"}
-        add={addFavMovie}
-        heading={"Popular Movies"}
-        movies={popular}
-      />
+      <PatternMovie heading={"Popular Movies"} data={popular} />
     </div>
   );
 };
