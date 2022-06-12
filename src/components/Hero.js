@@ -22,11 +22,11 @@ const Hero = () => {
   }, []);
   return (
     <main className="my-4">
-      <section className="sm:hidden">
-        <PatternMovie heading={"Now Playing"} movies={header} />
+      <section>
+        <PatternMovie heading={"Now Playing"} data={header} />
       </section>
 
-      {header !== null && (
+      {/* {header !== null && (
         <section className="px-8">
           <h1 className="text-center text-5xl py-4 mb-4 hidden sm:block">
             Now Playing
@@ -113,7 +113,7 @@ const Hero = () => {
             </li>
           </ul>
         </section>
-      )}
+      )} */}
     </main>
   );
 };

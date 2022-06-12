@@ -9,6 +9,7 @@ import Bookmarks from "./components/Bookmarks";
 import TopRated from "./components/TopRated";
 import Hero from "./components/Hero";
 import InfoMovie from "./components/InfoMovie";
+import Categories from "./components/Categories";
 function App() {
   return (
     <Router>
@@ -22,6 +23,7 @@ function App() {
         <Route path="/movie" element={<Movie />} />
         <Route path="/tv" element={<Tv />} />
         <Route path="/bookmarks" element={<Bookmarks />} />
+        <Route path="/categories" element={<Categories />} />
         <Route path="/top_rated" element={<TopRated />} />
       </Routes>
     </Router>
