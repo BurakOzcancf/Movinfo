@@ -1,16 +1,16 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import { Link } from "react-router-dom";
-import Mark from "../patterns/Mark";
-import { addFavMovie } from "../store/bookmarks-slice";
-import { useDispatch, useSelector } from "react-redux";
+// import { Link } from "react-router-dom";
+// import Mark from "../patterns/Mark";
+// import { addFavMovie } from "../store/bookmarks-slice";
+// import { useDispatch, useSelector } from "react-redux";
 import PatternMovie from "../patterns/PatternMovie";
 
 const Hero = () => {
-  const movie = useSelector((state) => state.bookmark.favMovie);
+  // const movie = useSelector((state) => state.bookmark.favMovie);
   const [header, setHeader] = useState(null);
-  const dispatch = useDispatch();
-  const poster = "https://www.themoviedb.org/t/p/original/";
+  // const dispatch = useDispatch();
+  // const poster = "https://www.themoviedb.org/t/p/original/";
   useEffect(() => {
     axios
       .get(
