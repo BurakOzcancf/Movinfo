@@ -2,11 +2,13 @@ import React from "react";
 import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 import Mark from "./Mark";
-import { useSelector } from "react-redux";
-import { addFavPerson } from "../store/bookmarks-slice";
-import defaultProfile from "../components/assets/defaultProfile.PNG";
+//import { useSelector } from "react-redux";
+import { addFavPerson, person } from "../store/bookmarks-slice";
+import defaultProfile from "../components/assets/defaultProfile.png";
+import { useAppSelector } from "store";
 const Category = ({ heading, data }) => {
-  const person = useSelector((state) => state.bookmark.favPerson);
+  const person = useAppSelector(state => state.bookmark.favPerson)
+  //const person = useSelector((state) => state.bookmark.favPerson);
   const dispatch = useDispatch();
   const poster = "https://www.themoviedb.org/t/p/original/";
   return (
@@ -16,7 +18,7 @@ const Category = ({ heading, data }) => {
       </h2>
       {data ? (
         <div className="p-4 relative items-center gap-2 grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 max-w-5xl justify-center m-auto ">
-          {data.map((item) => (
+          {data.map((item: person) => (
             <div
               key={item.id}
               className="group relative hover:scale-105 transition-all"

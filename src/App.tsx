@@ -10,6 +10,7 @@ import TopRated from "./components/TopRated";
 import Hero from "./components/Hero";
 import InfoMovie from "./components/InfoMovie";
 import Categories from "./components/Categories";
+import React from "react";
 function App() {
   return (
     <Router>

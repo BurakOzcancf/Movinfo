@@ -2,11 +2,28 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { useParams } from "react-router-dom";
 import PatternPerson from "../patterns/PatternPerson";
-const Info = () => {
+
+interface IInfoMovie {
+  title: string;
+  poster_path: string | null;
+  backdrop_path: string | null;
+  overview: string | null;
+  original_language: string;
+  release_date: string;
+  vote_average: string;
+  production_companies: [{
+    name: string;
+    id: number;
+  }];
+  production_countries: [{
+    name: string;
+  }];
+}
+const Info: React.FC = () => {
   const params = useParams();
-  const [movinfo, setMovinfo] = useState("");
+  const [movinfo, setMovinfo] = useState<IInfoMovie>();
   //const [similar, setSimilar] = useState("");
-  const [cast, setCast] = useState("");
+  const [cast, setCast] = useState([]);
   const poster = "https://www.themoviedb.org/t/p/original/";
   useEffect(() => {
     axios

@@ -1,15 +1,24 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { useParams } from "react-router-dom";
-import defaultProfile from "../components/assets/defaultProfile.PNG";
+import defaultProfile from "./assets/defaultProfile.png";
 import PatternMovie from "../patterns/PatternMovie";
 
-const Person = () => {
+interface IInfoPerson {
+  id: number;
+  name: string;
+  profile_path: string | null;
+  biography: string;
+}
+const Person: React.FC = () => {
+
+  const [person, setPerson] = useState<IInfoPerson>();
+
   const params = useParams();
   const poster = "https://www.themoviedb.org/t/p/original/";
-  const [person, setPerson] = useState("");
+
   // const [photo, setPhoto] = useState("");
-  const [filmography, setFilmography] = useState("");
+  const [filmography, setFilmography] = useState([]);
   useEffect(() => {
     axios
       .get(
@@ -38,15 +47,15 @@ const Person = () => {
       <div className="lg:flex p-4 max-w-7xl m-auto">
         <img
           className="w-1/2 max-w-sm mx-auto h-full"
-          src={poster + person.profile_path}
+          src={poster + person?.profile_path}
           onError={(e) => {
             e.currentTarget.src = defaultProfile;
           }}
-          alt={person.name}
+          alt={person?.name}
         />
         <div className="lg:px-8">
-          <h2 className="text-3xl my-8 lg:mt-0">{person.name}</h2>
-          <p className="opacity-90">{person.biography}</p>
+          <h2 className="text-3xl my-8 lg:mt-0">{person?.name}</h2>
+          <p className="opacity-90">{person?.biography}</p>
         </div>
 
         {/* <div>

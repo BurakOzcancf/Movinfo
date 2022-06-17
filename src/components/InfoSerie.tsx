@@ -2,13 +2,45 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { useParams } from "react-router-dom";
 import { Link } from "react-router-dom";
-import defaulProfile from "./assets/defaultProfile.PNG";
+import defaultProfile from "./assets/defaultProfile.png";
 
+interface ISimilar {
+  similar: [{
+    id: number;
+    name: string;
+    poster_path: number | string;
+  }]
+}
+interface ICast {
+  cast: [{
+    id: number;
+    name: string;
+    profile_path: string | null;
+    character: string;
+  }]
+}
+interface IInfoTv {
+  id: number;
+  name: string;
+  poster_path: string | null;
+  backdrop_path: string | null;
+  overview: string;
+  original_language: string;
+  first_air_date: string;
+  vote_average: number;
+  production_companies: [{
+    name: string;
+  }]
+  production_countries: [{
+    name: string
+  }]
+
+}
 const Info = () => {
   const params = useParams();
-  const [movinfo, setMovinfo] = useState("");
-  const [similar, setSimilar] = useState("");
-  const [cast, setCast] = useState("");
+  const [movinfo, setMovinfo] = useState<IInfoTv>();
+  const [similar, setSimilar] = useState<ISimilar["similar"]>();
+  const [cast, setCast] = useState<ICast["cast"]>();
   const poster = "https://www.themoviedb.org/t/p/original/";
   useEffect(() => {
     axios
@@ -44,12 +76,12 @@ const Info = () => {
             <img
               className="w-3/12 rounded-md ml-10 -mr-5 z-10"
               src={poster + movinfo.poster_path}
-              alt={movinfo.title}
+              alt={movinfo.name}
             />
             <img
               className="m-auto rounded-md -ml-10 w-9/12"
               src={poster + movinfo.backdrop_path}
-              alt={movinfo.title}
+              alt={movinfo.name}
             />
           </div>
           <ul className="p-4">
@@ -65,7 +97,7 @@ const Info = () => {
             </li>
             <li>
               Release Date:{" "}
-              <span className="opacity-80">{movinfo.release_date}</span>{" "}
+              <span className="opacity-80">{movinfo.first_air_date}</span>{" "}
             </li>
             <li>
               Vote:{" "}
@@ -101,7 +133,7 @@ const Info = () => {
                   className="w-32"
                   key={item.id}
                   src={poster + item.poster_path}
-                  alt={item.title}
+                  alt={item.name}
                 />
               ))}
             </div>
@@ -117,7 +149,7 @@ const Info = () => {
                 >
                   <img
                     onError={(e) => {
-                      e.currentTarget.src = defaulProfile;
+                      e.currentTarget.src = defaultProfile;
                     }}
                     className="w-40 m-auto"
                     src={poster + item.profile_path}
