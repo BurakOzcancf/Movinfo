@@ -3,44 +3,14 @@ import axios from "axios";
 import { useParams } from "react-router-dom";
 import { Link } from "react-router-dom";
 import defaultProfile from "./assets/defaultProfile.png";
+import { tv, cast, similar } from '../types'
 
-interface ISimilar {
-  similar: [{
-    id: number;
-    name: string;
-    poster_path: number | string;
-  }]
-}
-interface ICast {
-  cast: [{
-    id: number;
-    name: string;
-    profile_path: string | null;
-    character: string;
-  }]
-}
-interface IInfoTv {
-  id: number;
-  name: string;
-  poster_path: string | null;
-  backdrop_path: string | null;
-  overview: string;
-  original_language: string;
-  first_air_date: string;
-  vote_average: number;
-  production_companies: [{
-    name: string;
-  }]
-  production_countries: [{
-    name: string
-  }]
 
-}
 const Info = () => {
   const params = useParams();
-  const [movinfo, setMovinfo] = useState<IInfoTv>();
-  const [similar, setSimilar] = useState<ISimilar["similar"]>();
-  const [cast, setCast] = useState<ICast["cast"]>();
+  const [movinfo, setMovinfo] = useState<tv>();
+  const [similar, setSimilar] = useState<similar[]>();
+  const [cast, setCast] = useState<cast[]>();
   const poster = "https://www.themoviedb.org/t/p/original/";
   useEffect(() => {
     axios

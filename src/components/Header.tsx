@@ -8,6 +8,7 @@ import { Link } from "react-router-dom";
 import { HiMenuAlt3 } from "react-icons/hi";
 
 const Header = () => {
+
   const [isOpen, setIsOpen] = useState(false);
   return (
     <div className="py-2 border-b-2 bg-gray-800 border-yellow-500 flex items-center justify-between">

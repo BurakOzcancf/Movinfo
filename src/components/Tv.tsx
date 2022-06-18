@@ -1,6 +1,7 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import PatternSerie from "../patterns/PatternSerie";
+import { tv } from "types";
 const Movie = () => {
   useEffect(() => {
     axios
@@ -12,7 +13,7 @@ const Movie = () => {
       });
   }, []);
 
-  const [tv, setTv] = useState("");
+  const [tv, setTv] = useState<tv[]>([]);
   return (
     <div>
       <PatternSerie heading={"Popular Series"} data={tv} />

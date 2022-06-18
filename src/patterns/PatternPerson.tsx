@@ -3,10 +3,11 @@ import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 import Mark from "./Mark";
 //import { useSelector } from "react-redux";
-import { addFavPerson, person } from "../store/bookmarks-slice";
+import { addFavPerson } from "../store/bookmarks-slice";
 import defaultProfile from "../components/assets/defaultProfile.png";
 import { useAppSelector } from "store";
-const Category = ({ heading, data }) => {
+import { person } from "types";
+const Category = ({ heading, data }: { heading: string; data: person[] }) => {
   const person = useAppSelector(state => state.bookmark.favPerson)
   //const person = useSelector((state) => state.bookmark.favPerson);
   const dispatch = useDispatch();

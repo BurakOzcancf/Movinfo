@@ -3,22 +3,17 @@ import axios from "axios";
 import { useParams } from "react-router-dom";
 import defaultProfile from "./assets/defaultProfile.png";
 import PatternMovie from "../patterns/PatternMovie";
+import { person, movie } from '../types'
 
-interface IInfoPerson {
-  id: number;
-  name: string;
-  profile_path: string | null;
-  biography: string;
-}
 const Person: React.FC = () => {
 
-  const [person, setPerson] = useState<IInfoPerson>();
+  const [person, setPerson] = useState<person>();
 
   const params = useParams();
   const poster = "https://www.themoviedb.org/t/p/original/";
 
   // const [photo, setPhoto] = useState("");
-  const [filmography, setFilmography] = useState([]);
+  const [filmography, setFilmography] = useState<movie[]>([]);
   useEffect(() => {
     axios
       .get(

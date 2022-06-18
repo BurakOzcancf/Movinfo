@@ -1,13 +1,15 @@
 import React from "react";
 import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
-//import { useSelector } from "react-redux";
-import { addFavMovie, movie } from "../store/bookmarks-slice";
+import { addFavMovie } from "../store/bookmarks-slice";
 import Mark from "./Mark";
 import { useAppSelector } from "store";
-const Category = ({ heading, data }) => {
+import { movie } from "types";
+
+
+const Category = ({ heading, data }: { heading: string; data: movie[] }) => {
+
   const movie = useAppSelector(state => state.bookmark.favMovie)
-  //const movie = useSelector((state) => state.bookmark.favMovie);
   const dispatch = useDispatch();
   const poster = "https://www.themoviedb.org/t/p/original/";
   return (

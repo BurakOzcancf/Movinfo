@@ -1,8 +1,9 @@
 import axios from "axios";
 import React, { useState, useEffect } from "react";
 import PatternMovie from "../patterns/PatternMovie";
+import { movie } from "types";
 const TopRated = () => {
-  const [topRated, setTopRated] = useState("");
+  const [topRated, setTopRated] = useState<movie[]>([]);
   useEffect(() => {
     axios
       .get(

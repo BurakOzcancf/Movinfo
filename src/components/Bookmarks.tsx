@@ -3,12 +3,13 @@ import { connect } from "react-redux";
 import PatternMovie from "../patterns/PatternMovie";
 import PatternSerie from "../patterns/PatternSerie";
 import PatternPerson from "../patterns/PatternPerson";
-const mapStateToProps = (state) => ({
+import { movie, tv, person } from '../types'
+const mapStateToProps = (state: { bookmark: { favMovie: movie[]; favSerie: tv[]; favPerson: person[]; }; }) => ({
   movie: state.bookmark.favMovie,
   serie: state.bookmark.favSerie,
   person: state.bookmark.favPerson,
 });
-const Bookmarks = ({ movie, serie, person }) => {
+const Bookmarks = ({ movie, serie, person }: { movie: movie[]; serie: tv[]; person: person[] }) => {
   return (
     <div>
       <h1 className="text-5xl text-center p-4">Bookmarks</h1>

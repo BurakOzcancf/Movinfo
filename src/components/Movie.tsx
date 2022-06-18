@@ -1,8 +1,10 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import PatternMovie from "../patterns/PatternMovie";
+import { movie } from '../types'
+
 const Movie = () => {
-  const [popular, setPopular] = useState("");
+  const [popular, setPopular] = useState<movie[]>([]);
   useEffect(() => {
     axios
       .get(

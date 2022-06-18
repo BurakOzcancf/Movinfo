@@ -5,10 +5,11 @@ import axios from "axios";
 // import { addFavMovie } from "../store/bookmarks-slice";
 // import { useDispatch, useSelector } from "react-redux";
 import PatternMovie from "../patterns/PatternMovie";
+import { movie } from "types";
 
 const Hero = () => {
   // const movie = useSelector((state) => state.bookmark.favMovie);
-  const [header, setHeader] = useState(null);
+  const [header, setHeader] = useState<movie[]>([]);
   // const dispatch = useDispatch();
   // const poster = "https://www.themoviedb.org/t/p/original/";
   useEffect(() => {

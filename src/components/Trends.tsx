@@ -3,10 +3,11 @@ import axios from "axios";
 import PatternMovie from "../patterns/PatternMovie";
 import PatternSerie from "../patterns/PatternSerie";
 import PatternPerson from "../patterns/PatternPerson";
+import { movie, tv, person } from "types";
 const Trends = () => {
-  const [trendMovie, setTrendMovie] = useState("");
-  const [trendTv, setTrendTv] = useState("");
-  const [trendPerson, setTrendPerson] = useState("");
+  const [trendMovie, setTrendMovie] = useState<movie[]>([]);
+  const [trendTv, setTrendTv] = useState<tv[]>([]);
+  const [trendPerson, setTrendPerson] = useState<person[]>([]);
   useEffect(() => {
     axios
       .get(

@@ -1,10 +1,14 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import PatternMovie from "../patterns/PatternMovie";
+import { movie } from '../types'
+
 const Categories = () => {
-  const [category, setCategory] = useState("");
+
+  const [category, setCategory] = useState<movie[]>([]);
   const [query, setQuery] = useState(28);
   const [heading, setHeading] = useState("Action");
+
   useEffect(() => {
     axios
       .get(
@@ -14,6 +18,7 @@ const Categories = () => {
         setCategory(response.data.results);
       });
   }, [query]);
+
   return (
     <section>
       <ul className="grid text-white bg-gray-800 overflow-x-auto gap-x-4 grid-flow-col-dense items-center px-4 py-1">
